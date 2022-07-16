@@ -31,44 +31,19 @@ class RecetaResource extends Resource
             ->schema([
                 BelongsToSelect::make('productos_id')->relationship('productos', 'nombre'),
                 
-                //This Select gets all Insumos from a table and show them by name
- 
                 Select::make('insumos_id')
                 ->label('Insumo')
                 ->options(Insumo::all()->pluck('nombre', 'id')->toArray())
-                ->reactive()
-                ->afterStateUpdated(fn (callable $set) => $set ('unidad_compra', 'precio_compra')),
+                ->afterStateUpdated(function ($set, $state) {
+                        $set('unidad_compra', Insumo::find($state)->unidad_compra);
+                        $set('precio_compra', Insumo::find($state)->precio_compra);
+                })
+                ->reactive(),
                 
-                Select::make('unidad_compra')
-                ->label(label:'Unidad Compra')
-                ->options(function (callable $get){
-                    $insumo = Insumo::find($get('id'));
- 
-                    if (! $insumo) {
-                        return Insumo::pluck('unidad_compra', 'id');
-                        
-                    }
- 
-                    return $insumo->recetas->pluck('unidad_compra','id');
-                    
-                }),
- 
-                                
-                Select::make('precio_compra')
-                ->label(label:'Precio Compra')
-                ->options(function (callable $get){
-                    $insumo = Insumo::find($get('id'));
- 
-                    if (! $insumo) {
-                        
-                        return Insumo::pluck('precio_compra', 'id');
-                  
-                    }
- 
-                    return $insumo->recetas->pluck('precio_compra','id');
-                    
-                }),
-                
+                TextInput::make('unidad_compra')->label(label:'Unidad de Compra')->suffix('Automatico al Seleccionar Insumo')->required(),
+
+                TextInput::make('precio_compra')->label(label:'Precio de Compra')->suffix('Automatico al Seleccionar Insumo')->required(),
+
                 Forms\Components\TextInput::make('costo_porcion')->required(),
                 Forms\Components\TextInput::make('unidad_medida')->required(),
                 Forms\Components\TextInput::make('equivalencia')->required(),
