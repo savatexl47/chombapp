@@ -5,19 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Proveedor extends Model
+class Salida extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'nombre',
-        'contacto',
-        'celular',
-        
+        'productos_id',
+        'cantidad',
+                
     ];
-
-     public function ingresos()
+    public function productos()
     {
-        return $this->belongsTo(Categoria::class);
+        return $this->belongsTo(Producto::class);
     }
 }
+

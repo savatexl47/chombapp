@@ -26,9 +26,9 @@ class ProductoResource extends Resource
             ->schema([
                 BelongsToSelect::make('categorias_id')->relationship('categorias', 'nombre'),
                 Forms\Components\TextInput::make('nombre')->required(),
-                Forms\Components\TextInput::make('descripcion')->required(),
-                Forms\Components\TextInput::make('precio')->required(),
-                Forms\Components\TextInput::make('igv')->required(),
+                //Forms\Components\TextInput::make('descripcion')->required(),
+                //Forms\Components\TextInput::make('precio')->required(),
+                //Forms\Components\TextInput::make('igv')->required(),
             ]);
     }
 
@@ -38,9 +38,9 @@ class ProductoResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('categorias.nombre'),
                 Tables\Columns\TextColumn::make('nombre')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('descripcion'),
-                Tables\Columns\TextColumn::make('precio'),
-                Tables\Columns\TextColumn::make('igv'),
+                //Tables\Columns\TextColumn::make('descripcion'),
+                //Tables\Columns\TextColumn::make('precio'),
+                //Tables\Columns\TextColumn::make('igv'),
                
             ])
             ->filters([

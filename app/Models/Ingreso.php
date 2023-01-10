@@ -10,12 +10,28 @@ class Ingreso extends Model
     use HasFactory;
 
     protected $fillable = [
-        'tipo_comprobante',
-        'serie',
-        'numero_comprobante',
+        'insumos_id',
+        'precio_compra',
+        'stock',
+        'stock_min',
+        'stock_max',
+        'costo_min',
+        'costo_max',
+        'stock_add',
+        'costo_actual',
+        'proveedors_id',
+        'observaciones',
         'fecha',
-        'igv',
-        'total',
         
     ];
+
+     public function insumos()
+    {
+        return $this->belongsTo(Insumo::class);//hasMany
+    }
+
+     public function proveedors()
+    {
+        return $this->belongsTo(Proveedor::class);//hasMany
+    }
 }

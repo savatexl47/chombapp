@@ -20,6 +20,7 @@ class Insumo extends Model
         'stock_max',
         'costo_min',
         'costo_max',
+        'merma',
 
     ];
     public function cat_ins()
@@ -30,5 +31,10 @@ class Insumo extends Model
     public function recetas()
     {
         return $this->hasMany(Receta::class);//belongsTo
+    }
+
+    public function ingresos()
+    {
+        return $this->belongsTo(Ingreso::class);//belongsTo
     }
 }

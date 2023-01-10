@@ -29,15 +29,16 @@ class InsumoResource extends Resource
                 BelongsToSelect::make('cat_ins_id')->relationship('cat_ins', 'nombre')->label(label:'Categoria'),
                 Forms\Components\TextInput::make('nombre')->required(),
                 Forms\Components\TextInput::make('marca')->required(),
-                //Forms\Components\TextInput::make('presentacion')->required(),
-                //DatePicker::make('vencimiento')->format('Y-m-d')->displayFormat('d/m/Y'),
+                
                 Forms\Components\TextInput::make('unidad_compra')->required(),
-                Forms\Components\TextInput::make('precio_compra')->required(),
+                Forms\Components\TextInput::make('precio_compra')
+                ->label(label:'Costo')->required(),
                 Forms\Components\TextInput::make('stock')->required(),
                 Forms\Components\TextInput::make('stock_min')->required(),
                 Forms\Components\TextInput::make('stock_max')->required(),
                 Forms\Components\TextInput::make('costo_min')->required(),
                 Forms\Components\TextInput::make('costo_max')->required(),
+                Forms\Components\TextInput::make('merma'),
             ]);
     }
 
@@ -47,16 +48,13 @@ class InsumoResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('cat_ins.nombre')->label(label:'Categoria'),
                 Tables\Columns\TextColumn::make('nombre')->searchable(),
-                Tables\Columns\TextColumn::make('marca'),
-                //Tables\Columns\TextColumn::make('presentacion'),
-                //Tables\Columns\TextColumn::make('vencimiento'),
+                //Tables\Columns\TextColumn::make('marca'),
                 Tables\Columns\TextColumn::make('unidad_compra')->limit(10),
-                Tables\Columns\TextColumn::make('precio_compra')->limit(10),
+                Tables\Columns\TextColumn::make('precio_compra')->label(label:'Costo porcion')->limit(10),
                 Tables\Columns\TextColumn::make('stock'),
                 Tables\Columns\TextColumn::make('stock_min'),
                 Tables\Columns\TextColumn::make('stock_max'),
-                Tables\Columns\TextColumn::make('costo_min'),
-                Tables\Columns\TextColumn::make('costo_max'),
+                
             ])
             ->filters([
                 //

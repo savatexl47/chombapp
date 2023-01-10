@@ -12,9 +12,7 @@ class Producto extends Model
     protected $fillable = [
         'categorias_id',
         'nombre',
-        'descripcion',
-        'precio',
-        'igv',
+        
         
     ];
     public function categorias()
@@ -25,5 +23,10 @@ class Producto extends Model
     public function recetas()
     {
         return $this->belongsTo(Receta::class);
+    }
+
+     public function salidas()
+    {
+        return $this->hasMany(Salida::class);
     }
 }

@@ -10,8 +10,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Storage;
+use Filament\Models\Contracts\FilamentUser;
 
-class User extends Authenticatable implements HasName, HasAvatar
+
+class User extends Authenticatable implements HasName, HasAvatar, FilamentUser
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -46,6 +48,11 @@ class User extends Authenticatable implements HasName, HasAvatar
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function canAccessFilament(): bool
+    {
+        return str_ends_with($this->email, '@lachombadedonpepe.com') && $this->hasVerifiedEmail();
+    }
 
     public function getFilamentName(): string
     {
